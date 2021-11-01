@@ -1,17 +1,7 @@
-//
-//  AppDelegate.swift
-//  HW13-14
-//
-//  Created by Bohdan Hawrylyshyn on 27.10.2021.
-//
-
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true

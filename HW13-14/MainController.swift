@@ -7,7 +7,6 @@ class MainController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configButtons()
-        print(NSHomeDirectory())
     }
     
     func configButtons() {

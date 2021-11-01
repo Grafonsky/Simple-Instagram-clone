@@ -21,7 +21,6 @@ class LogInControllerController: UIViewController {
         view.endEditing(true)
     }
     
-    
     @IBAction func actionLogIn(_ sender: Any) {
         guard let checkFieldName = usernameTextField.text?.isEmpty else { return }
         guard let checkFieldPass = passwordTextField.text?.isEmpty else { return }
@@ -34,12 +33,11 @@ class LogInControllerController: UIViewController {
         guard let password: String = passwordTextField.text else { return }
         if getProfile(name: username, pass: password) {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            if let controller = storyboard.instantiateViewController(withIdentifier: "PicSceneID") as? PictureSceneController {
+            if let controller = storyboard.instantiateViewController(withIdentifier: "FeedID") as? FeedController {
                 controller.username = username
                 controller.profilePic = profilePic
                 navigationController?.pushViewController(controller, animated: true)
             }
-            
         }
     }
     

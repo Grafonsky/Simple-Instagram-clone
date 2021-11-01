@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  HW13-14
-//
-//  Created by Bohdan Hawrylyshyn on 27.10.2021.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

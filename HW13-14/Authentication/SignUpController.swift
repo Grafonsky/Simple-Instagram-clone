@@ -69,6 +69,9 @@ class SignUpController: UIViewController {
     func addCustomAlert() {
         let succesfulSignUp = Bundle.loadView(fromNib: "SuccesfulSignUp", withType: SuccesfulSignUp.self)
         succesfulSignUp.frame = CGRect(x: view.frame.midX - succesfulSignUp.frame.width / 2, y: view.frame.midY - succesfulSignUp.frame.width / 2, width: succesfulSignUp.frame.width, height: succesfulSignUp.frame.height)
+        succesfulSignUp.onClose = {[weak self] in
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
         succesfulSignUp.addShadows(radius: 25, opacity: 0.66)
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCrossDissolve, animations: {
             self.view.addSubview(succesfulSignUp)

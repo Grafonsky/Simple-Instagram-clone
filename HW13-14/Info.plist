@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TYPOGRAPH PRO Ultra Light.ttf</string>
+		<string>TYPOGRAPH PRO Ultra Light Italic.ttf</string>
+		<string>TYPOGRAPH PRO Semi Bold.ttf</string>
+		<string>TYPOGRAPH PRO Semi Bold Italic.ttf</string>
+		<string>TYPOGRAPH PRO Light.ttf</string>
+		<string>TYPOGRAPH PRO Light Italic.ttf</string>
+		<string>TYPOGRAPH PRO Extra Bold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
