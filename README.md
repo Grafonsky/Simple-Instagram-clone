@@ -24,7 +24,7 @@
   <img src="https://user-images.githubusercontent.com/44808549/139905919-bb49f030-afe5-466e-94f8-d93961cb9d7f.png" width="250" />                                                                                                                     
 </p>
 
-# TMS_HW15
+# TMS_HW15_1
 Домашнее задание на курсе по iOS-разработке в TeachMeSkills
 > Грамматика преподавателя сохранена
 
