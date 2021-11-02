@@ -30,7 +30,6 @@
 		90E3A03A272F3000005AA231 /* TYPOGRAPH PRO Ultra Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90CE2EC8272EEFDD003DF13B /* TYPOGRAPH PRO Ultra Light.ttf */; };
 		90E3A03C272F36EF005AA231 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E3A03B272F36EF005AA231 /* CommentController.swift */; };
 		90E3A03E272F3DB3005AA231 /* ImageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E3A03D272F3DB3005AA231 /* ImageDataModel.swift */; };
-		90E3A047272F4B91005AA231 /* FeedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E3A046272F4B91005AA231 /* FeedContent.swift */; };
 		90E3A04B272F9717005AA231 /* CommentTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90E3A04A272F9717005AA231 /* CommentTemplate.xib */; };
 		90E3A04D272F9930005AA231 /* CommentTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E3A04C272F9930005AA231 /* CommentTemplate.swift */; };
 /* End PBXBuildFile section */
@@ -61,7 +60,6 @@
 		90CE2EC9272EEFDD003DF13B /* TYPOGRAPH PRO Semi Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TYPOGRAPH PRO Semi Bold Italic.ttf"; sourceTree = "<group>"; };
 		90E3A03B272F36EF005AA231 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
 		90E3A03D272F3DB3005AA231 /* ImageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataModel.swift; sourceTree = "<group>"; };
-		90E3A046272F4B91005AA231 /* FeedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContent.swift; sourceTree = "<group>"; };
 		90E3A04A272F9717005AA231 /* CommentTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTemplate.xib; sourceTree = "<group>"; };
 		90E3A04C272F9930005AA231 /* CommentTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTemplate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,7 +156,6 @@
 		90E3A045272F4B81005AA231 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				90E3A046272F4B91005AA231 /* FeedContent.swift */,
 				90CE2EC0272EEE7F003DF13B /* PostTemplate.xib */,
 				90E3A03D272F3DB3005AA231 /* ImageDataModel.swift */,
 				9094B855272F16F700E9A47D /* CustomCell.swift */,
@@ -257,7 +254,6 @@
 				908B04F62729E349004CD40A /* MainController.swift in Sources */,
 				908B04F22729E349004CD40A /* AppDelegate.swift in Sources */,
 				908B05072729EA12004CD40A /* UIView+extensions.swift in Sources */,
-				90E3A047272F4B91005AA231 /* FeedContent.swift in Sources */,
 				9094B854272EF8D200E9A47D /* FeedController.swift in Sources */,
 				9024F7B3272ADD9B00AB3FD9 /* LogInController.swift in Sources */,
 				908B04F42729E349004CD40A /* SceneDelegate.swift in Sources */,

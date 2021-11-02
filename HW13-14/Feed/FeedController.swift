@@ -1,5 +1,13 @@
 import UIKit
 
+struct CellData {
+    let username: String
+    let userPic: UIImage
+    let namePic: String
+    let userPost: UIImage
+    let postDesc: String
+}
+
 class FeedController: UITableViewController {
     @IBOutlet var tableview: UITableView!
     
@@ -7,13 +15,20 @@ class FeedController: UITableViewController {
     var profilePic: UIImage?
     var selectedIndex: Int = 0
     var models = [ImageDataModel]()
+    var arrayOfCellData = [CellData]()
+    var myArr: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        config()
+    }
+    
+    func config() {
         getData()
         tableview.dataSource = self
         tableView.register(UINib(nibName: "PostTemplate", bundle: Bundle(for: CustomCell.self)), forCellReuseIdentifier: "PostTemplate")
         updateDataFromStorage()
+
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,71 +52,63 @@ class FeedController: UITableViewController {
             cell.postDesc.text = post.postDesc
             cell.postPic.image = post.userPost
             cell.backgroundColor = UIColor.clear
-            var modelObject = models[indexPath.row]
-            print(modelObject)
-            if checkIfUserLike(modelObject: modelObject) == true {
+            if checkIfUserLike(modelObject: models[indexPath.row]) == true {
                 cell.isLiked.image = UIImage(named: "like.png")
             } else {
                 cell.isLiked.image = UIImage(named: "notLike.png")
             }
-            cell.addComment = {[weak self] in
-                if cell.textfieldComment.text != "" {
-                    guard let unwrapUsername = self?.username else { return }
-                    guard let unwrapComment = cell.textfieldComment.text else { return }
-                    modelObject.comments.append("@" + unwrapUsername + ": " + unwrapComment)
-                    cell.textfieldComment.text = ""
-                    self?.view.endEditing(true)
-                } else {
-                    let alert = UIAlertController(title: "Alert", message: "Add a comment!", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true)
-                    }
-                }
             cell.onComments = {[weak self] in
+                self?.selectedIndex = indexPath.row
                 let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
                 if let controller = storyboard.instantiateViewController(withIdentifier: "CommentID") as? CommentController {
+                    guard let unwrapModels = self?.models else { return }
                     controller.selectedIndex = indexPath.row
-                    controller.commentModels = modelObject.comments
-                    self?.navigationController?.pushViewController(controller, animated: true)
+                    controller.commentUsername = self?.username
+                    controller.commentUserpic = self?.profilePic
+                    self?.present(controller, animated: true)
                 }
             }
             cell.onLike = {[weak self] in
                 self?.selectedIndex = indexPath.row
-                if let unwrapUsername = self?.username {
-                    if self?.isLiked() == false {
-                        cell.isLiked.image = UIImage(named: "notLike.png")
-                    } else {
-                        cell.isLiked.image = UIImage(named: "like.png")
-                    }
+                if self?.isLiked() == false {
+                    cell.isLiked.image = UIImage(named: "notLike.png")
+                } else {
+                    cell.isLiked.image = UIImage(named: "like.png")
                 }
-                print(modelObject.whoLiked)
+                self?.saveData()
             }
             return cell
         }
-        return UITableViewCell.init(frame: CGRect(x: self.view.frame.midX - self.view.frame.width / 2, y: self.view.frame.midY - self.view.frame.height / 2, width: 414, height: 200))
+        return UITableViewCell()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+    func getData() {
+        arrayOfCellData = [
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "1.jpeg", userPost: setPic("1.jpeg"), postDesc: "Default Default Def aultD efau ltDef aultDef aultDe fault desc ript ion by init #1"),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "2.jpeg", userPost: setPic("2.jpeg"), postDesc: "Default description by init #2"),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "3.png", userPost: setPic("3.png"), postDesc: "Default description by init #3"),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "4.jpeg", userPost: setPic("4.jpeg"), postDesc: "Default description by init #4"),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "5.jpeg", userPost: setPic("5.jpeg"), postDesc: "@NinjaTheory: Now hiring: IT Technician."),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "6.jpeg", userPost: setPic("6.jpeg"), postDesc: "Default description by init #6"),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "7.jpg", userPost: setPic("7.jpg"), postDesc: "Default description by init #7"),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "8.jpg", userPost: setPic("8.jpg"), postDesc: "Default description by init #8"),
+            CellData(username: "Admin", userPic: setPic("profilePic.png"), namePic: "9.jpg", userPost: setPic("9.jpg"), postDesc: "Default description by init #9")
+        ]
     }
-
-    @objc func keyboardWillAppear() {
-        if view.frame.origin.y == 0 {
-            view.transform = CGAffineTransform(translationX: view.frame.origin.x, y: view.frame.origin.y - 324)
-        }
-    }
-
-    @objc func keyboardWillDisappear() {
-        if view.frame.origin.y == -324 {
-            view.transform = CGAffineTransform(translationX: view.frame.origin.x, y: view.frame.origin.y + 324)
+    
+    func setPic(_ pic: String) -> UIImage {
+        if let unwrapPic = UIImage(named: pic) {
+            return unwrapPic
+        } else {
+            return UIImage()
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
+    func fillArr() -> [String] {
+        arrayOfCellData.map {object in
+            myArr.append(object.namePic)
+        }
+        return myArr
     }
     
     func checkIfUserLike(modelObject: ImageDataModel) -> Bool {
@@ -117,11 +124,10 @@ class FeedController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        print(selectedIndex)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 679
+        return 631
     }
     
     func updateDataFromStorage() {
@@ -133,7 +139,7 @@ class FeedController: UITableViewController {
             models = decodedData
         } else {
             let myArray = fillArr()
-            models = myArray.map { ImageDataModel(name: $0, whoLiked: [], comments: []) }
+            models = myArray.map { ImageDataModel(name: $0, whoLiked: [], comments: [:]) }
             saveData()
         }
     }
@@ -151,23 +157,26 @@ class FeedController: UITableViewController {
     
     func isLiked() -> Bool {
         guard let unwrapName = username else { return false }
-        var model = models[selectedIndex]
-        var likeStatus: Bool
+        let model = models[selectedIndex]
         if checkIfUserLike(modelObject: models[selectedIndex]) == true {
             if let index = model.whoLiked.firstIndex(of: unwrapName) {
                 models[selectedIndex].whoLiked.remove(at: index)
             }
-            likeStatus = false
-        } else {
-            models[selectedIndex].whoLiked.append(unwrapName)
-            likeStatus = true
+            return false
         }
-        saveData()
-        return likeStatus
-    }
+        models[selectedIndex].whoLiked.append(unwrapName)
+        return true
+        }
     
-    @IBAction func actionHideKeyboard(_ sender: Any) {
-        view.endEditing(true)
+    func addComment(string: String) {
+        if string != "" {
+            guard let unwrapUsername = username else { return }
+            models[selectedIndex].comments["@" + unwrapUsername + ": " + string] = Date.now
+            saveData()
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Add a comment!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
     }
 }
-

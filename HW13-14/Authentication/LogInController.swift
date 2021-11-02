@@ -17,6 +17,29 @@ class LogInControllerController: UIViewController {
         buttonLogIn.buttonBorder(color: .systemBlue, width: 2)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    @objc func keyboardWillAppear() {
+        if view.frame.origin.y == 0 {
+            view.transform = CGAffineTransform(translationX: view.frame.origin.x, y: view.frame.origin.y - 50)
+        }
+    }
+
+    @objc func keyboardWillDisappear() {
+        if view.frame.origin.y == -50 {
+            view.transform = CGAffineTransform(translationX: view.frame.origin.x, y: view.frame.origin.y + 50)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @IBAction func hideKeyboard(_ sender: Any) {
         view.endEditing(true)
     }
@@ -36,7 +59,9 @@ class LogInControllerController: UIViewController {
             if let controller = storyboard.instantiateViewController(withIdentifier: "FeedID") as? FeedController {
                 controller.username = username
                 controller.profilePic = profilePic
-                navigationController?.pushViewController(controller, animated: true)
+                controller.modalPresentationStyle = .fullScreen
+                controller.modalTransitionStyle = .crossDissolve
+                present(controller, animated: true)
             }
         }
     }

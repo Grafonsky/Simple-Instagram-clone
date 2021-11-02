@@ -8,7 +8,6 @@ class SuccesfulSignUp: UIView {
     }
 
     @IBAction func actionDismiss(_ sender: Any) {
-//        self.removeFromSuperview()
         onClose?()
     }
     

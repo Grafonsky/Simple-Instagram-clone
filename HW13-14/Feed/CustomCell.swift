@@ -31,9 +31,4 @@ class CustomCell: UITableViewCell {
     @IBAction func actionLike(_ sender: Any) {
         onLike?()
     }
-    
-    @IBAction func actionAddComment(_ sender: Any) {
-        addComment?()
-    }
-    
 }
