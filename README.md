@@ -31,4 +31,4 @@
 #### Основное
 - Добавить даты к результатам заезда в гонках, или дату комментария к картинке
 
-<img src="https://user-images.githubusercontent.com/44808549/139907387-3249912a-070f-433a-a462-57ee75ab0920.png" width="250" />
+<img src="https://user-images.githubusercontent.com/44808549/139909677-d6bde298-0f45-4168-b75b-54dbbe985246.png" width="250" />
