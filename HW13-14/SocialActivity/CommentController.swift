@@ -13,6 +13,10 @@ class CommentController: UIViewController {
     var commentUserpic: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        config()
+    }
+    
+    func config() {
         updateDataFromStorage()
         userpic.image = commentUserpic
         tableview.delegate = self
